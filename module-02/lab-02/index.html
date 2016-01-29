@@ -75,9 +75,9 @@
 <!--JavaScript codes manipulating selected elements in the DOM which act the same way as CSS rules. We have changed our h1 heading text, our id element and a few other elements-->
     <script>
   document.querySelector('h1').innerHTML = 'web mapping is sweet!';  
-/*
+/*Selection of an element by its unique identifier like id star will change its background style to a different color.*/
         var star = document.getElementById('star');
-        star.style.background = '#4d4a9f'; */  
+        star.style.background = '#4d4a9f';   
        var elements = document.getElementsByClassName('circle');
 for(var i=0; i <= elements.length-1;i++){
     elements[i].style['border-radius'] = '20%';  
