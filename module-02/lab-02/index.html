@@ -1,40 +1,94 @@
 <!DOCTYPE html>
 <html>
-
+<!--The heading tags contain metadata about the document, which is not displayed with the webpage like title and stylesheets.  Also, the CSS rules are contain in withing the heading tags.  These CSS rules give the form to our document including color, background, font-size, etc.-->
 <head>
     <meta charset=utf-8 />
     <title>MAP672 Module 2 Template</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <style>
-        /* CSS style rules go here! */
-        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            font-family: sans-serif;
+            color: #3d3d3d;
+        } 
+        h1 {
+            font-size: 1.6em;
+            margin-left: 25px;
+        }
+        h2 {
+            font-size: 1.4em;
+            margin-left: 25px;
+        }
+        p {
+            font-size: 1em;
+            margin: 15px 25px;
+            max-width: 800px;
+        }
+        a {
+            color: #3e6b93;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        a:hover { 
+        text-decoration: underline;
+        }
+        img {
+            margin-left: 25px;
+        }
+        #star {
+            width: 200px;
+            height: 200px;
+            background: #3e6b93;
+            margin: 25px;
+        }
+        .map {
+            width: 100px;
+            height: 100px;
+            background: #bf6864;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 25px;
+        }
     </style>
 </head>
 
 <body>
-<!-- Structured HTML goes within the body tags -->
     
-    <h1>heading 1</h1>
-    <h2>heading 2</h2>
-    <p>paragraph: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus.</p>
-    <img src="images/world.png" alt="world map">
-    <p>paragraph with link: <a href="https://en.wikipedia.org/wiki/Lorem_ipsum">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl.</p>
+    <h1>A Voltaic Globe</h1>
+    <h2>There are 24 time zones around the world</h2>
+    <p>The cartographic gaze has come to see itself as a technical-scientific practice of representing nature.</p>
+    <img src="images/world2.png" alt="world map">
+    <!--It gives us the ability to link the bacon ipsum generator webpage within our webpage document-->
+    <p>paragraph with link: <a href="https://baconipsum.com">bacon ipsum generator</a> Pickles postulates that while an intent might exist to create an objective, even an omniscient, view when mapping that represents a natural reflection.  However, he refutes this intent by claiming that map-making historically is dominated with political intent, and thereby consequences.  The map provided in this exercise is an attempt to remove the political intent of a map to make it more objectively a reflection of the earth.  But, as we have previously learned, it is nearly impossible to create an objective representation that provides an accurate reflection simply because of projection issues (e.g., WGS, Mercator, etc).</p>
     <ul>
-        <li>un-ordered list item 1</li>
-        <li>list item 2</li>
-        <li>list item 3</li>
+        <li><a href="https://leafletjs.com">Leaflet</a></li>
+        <li><a href="https://mapbox.com">Mapbox</a></li>
+        <li><a href="https://cartodb.com">CartoDB</a></li>
+        <li><a href="https://d3js.org">Data-Driven Documents</a></li>
     </ul>
-    <div id="box"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-
+<!--The division tags contain the id and the class attribute.  Our unique id in these case is star and our class attribute is map.-->
+    <div id="star"></div>
+    <div class="map"></div>
+<!--JavaScript codes manipulating selected elements in the DOM which act the same way as CSS rules. We have changed our h1 heading text, our id element and a few other elements-->
     <script>
-        // JavaScript code goes here  
-        
+  document.querySelector('h1').innerHTML = 'web mapping is sweet!';  
+/*
+        var star = document.getElementById('star');
+        star.style.background = '#4d4a9f'; */  
+       var elements = document.getElementsByClassName('circle');
+for(var i=0; i <= elements.length-1;i++){
+    elements[i].style['border-radius'] = '20%';  
+}     
+       star.addEventListener('click', function() {
+    this.style.width = '400px';   
+});
+        var newListItem = document.createElement('li');
+newListItem.innerHTML = "list item 4";
+document.querySelector('ul').appendChild(newListItem);
     </script>
-    
 </body>
 
 </html>
