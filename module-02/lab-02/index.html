@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<!--The heading tags contain metadata about the document, which is not displayed with the webpage like title and stylesheets.  Also, the CSS rules are contain in withing the heading tags.  These CSS rules give the form to our document including color, background, font-size, etc.-->
+
 <head>
     <meta charset=utf-8 />
-    <title>MAP672 Module 2 Template</title>
+    <title>MAP672 Module 2: The Cartographic Gaze</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <style>
@@ -14,6 +14,7 @@
             font-family: sans-serif;
             color: #3d3d3d;
         } 
+        /*The heading tags contain metadata about the document, which is not displayed with the webpage like title and stylesheets.  Also, the CSS rules are contain in withing the heading tags.  These CSS rules give the form to our document including color, background, font-size, etc.*/
         h1 {
             font-size: 1.6em;
             margin-left: 25px;
@@ -33,7 +34,7 @@
             text-decoration: none;
         }
         a:hover { 
-        text-decoration: underline;
+            text-decoration: underline;
         }
         img {
             margin-left: 25px;
@@ -45,6 +46,14 @@
             margin: 25px;
         }
         .map {
+            width: 100px;
+            height: 100px;
+            background: #bf6864;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 25px;
+        }
+        .circle {
             width: 100px;
             height: 100px;
             background: #bf6864;
@@ -71,23 +80,33 @@
     </ul>
 <!--The division tags contain the id and the class attribute.  Our unique id in these case is star and our class attribute is map.-->
     <div id="star"></div>
-    <div class="map"></div>
+<!--    <div class="map"></div>-->
+    
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
 <!--JavaScript codes manipulating selected elements in the DOM which act the same way as CSS rules. We have changed our h1 heading text, our id element and a few other elements-->
     <script>
-  document.querySelector('h1').innerHTML = 'web mapping is sweet!';  
-/*Selection of an element by its unique identifier like id star will change its background style to a different color.*/
+        document.querySelector('h1').innerHTML = 'web mapping is sweet!';  
+        
+        /*Selection of an element by its unique identifier like id star will change its background style to a different color.*/
         var star = document.getElementById('star');
         star.style.background = '#4d4a9f';   
-       var elements = document.getElementsByClassName('circle');
-for(var i=0; i <= elements.length-1;i++){
-    elements[i].style['border-radius'] = '20%';  
-}     
-       star.addEventListener('click', function() {
-    this.style.width = '400px';   
-});
+       
+        var elements = document.getElementsByClassName('circle');
+        for(var i=0; i <= elements.length-1;i++){
+            elements[i].style['border-radius'] = '20%';  
+        }     
+        
+        star.addEventListener('click', function() {
+            this.style.width = '400px';   
+        });
         var newListItem = document.createElement('li');
-newListItem.innerHTML = "list item 4";
-document.querySelector('ul').appendChild(newListItem);
+        newListItem.innerHTML = "list item 4";
+        
+        document.querySelector('ul').appendChild(newListItem);
+        
+        console.log('hello map');
     </script>
 </body>
 
