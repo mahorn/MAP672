@@ -15,9 +15,9 @@
         body {
             margin: 0;
             padding: 0;
-            background: whitesmoke;
-            font-family: Lato, sans-serif;
-            color: #0D0000;
+            background: #484452;
+            font-family: Chalkboard, serif;
+            color: #C7AFBD;
         }
         header {
             padding: 6px 10%;
@@ -25,11 +25,11 @@
         h1 {
             display: inline-block;
             margin-right: 20px;
-            color: #001323;
+            color: #C7AFBD;     
         }
         h2 {
             display: inline-block;
-            color: #001323;
+            color: #DDECEF;
         }
         #map {
             width: 80%;
@@ -42,7 +42,12 @@
         }
         p {
             font-size: 1em;
-            color: #001323;
+            color: #DDECEF;
+        }
+        a {
+            color: plum;
+            font-weight: bold;
+            text-decoration: none;
         }
         /* Additional style rules go here! */
     </style>
@@ -50,17 +55,24 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>KENTUCKY'S FOREMOST CITIES</h1>
+        <h2>Land of Tobacco Farms, Bourbon and The Kentucky Derby!</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.
-        </p>
+        <p>Map authored by Maria Renee Horn</p>
+        
+        <p>Louisville is many things-original, eclectic, historic, dynamic, and energetic.  You could spend a lifetime getting to know this beautiful city, the people, the neighborhoods, the culture, and the history that make Louisville truly original. 
+            <a href="http://www.gotolouisville.com/explore-louisville/index.aspx">City of Louisville</a></p>
+        
+        <p>Kentucky's Capital city nestle between Louisville and Lexington along the Kentucky River is in the heart of bourbon, horse and wine country. The city of Frankfort, is home to several major distilleries of Kentucky Bourbon, including the Buffalo Trace Distillery.
+            <a href="http://www.visitfrankfort.com">City of Frankfort</a></p>
+        
+        <p>The Horse Capital of the World, Lexington, is a vibrant city located in the heart of Kentucky's famed scenic Bluegrass Region. Though surrounded by 450 horse farms, Lexington is surprisingly cosmopolitan. Its historic downtown is a compact mixture of art galleries, parks, theaters, restaurants, business offices and charming neighborhoods.
+            <a href="www.kentuckytourism.com/city/lexington/?source=google&gclid=Cj0KEQiAisy1BRD7_YSgpduD2cEBEiQAPR3UuBiS9psZVPC6J6xPxP6xvs70Fww9gomADH69N_ESWXwaAleR8P8HAQ">City of Lexington</a></p>
+        
     </footer>
 
     <script>
@@ -83,8 +95,48 @@
         map.addLayer(tiles);
         
         // BEGIN WRITING CODE FOR LAB 03 HERE
+        var city1Name = "Lexington";
+        console.log(city1Name);
+        var city1Lat = 38.070995;
+        console.log(city1Lat);
+        var city1Lon = -84.593925;
+        console.log(city1Lon);
+        var city1Pop = 308428;
+        console.log(city1Pop);
+        var city1Capital = "Lexington";
+        console.log(!true);
         
-       
+        var city2Name = "Frankfort";
+        console.log(city2Name);
+        var city2Lat = 38.192651;
+        console.log(city2Lat);
+        var city2Lon = -84.86637;
+        console.log(city2Lon);
+        var city2Pop = 25527;
+        console.log(city2Pop);
+        var city2Capital = "Frankfort"
+        console.log(!false);
+        
+        var city3Name = "Louisville"
+        console.log(city3Name);
+        var city3Lat = 38.328732;
+        console.log(city3Lat);
+        var city3Lon = -85.764771;
+        console.log(city3Lon);
+        var city3Pop = 756832;
+        console.log(city3Pop);
+        var city3Capital = "Louisville";
+        console.log(!true);
+        
+        var totalPop = [city1Pop + city2Pop + city3Pop];
+        console.log("The total population of these cities is:", totalPop);
+        
+        var averagePop = [totalPop/3];
+        console.log("The average population of these cities is:", averagePop);
+        
+        var cities = ["Lexington", "Frankfort", "Louisville"];
+        console.log(cities[2]);
+        
         
         // END WRITING CODE FOR LAB 03 HERE
         
@@ -99,27 +151,27 @@
         L.marker([city1Lat,city1Lon]).addTo(map)
             .bindPopup(city1Popup);
         
-//         CITY2 MARKER CODE HERE
-//        var city2Popup = "<b>"+city2Name+"</b><br>"
-//                        +"<b>population</b>: "+city2Pop;
+//            CITY2 MARKER CODE HERE
+        var city2Popup = "<b>"+city2Name+"</b><br>"
+        +"<b>population</b>: "+city2Pop;
 //        
-//        if(city2Capital == true) {
-//            city2Popup += "<br>Capital of the Commonwealth of Kentucky";   
-//        }
+        if(city2Capital == true) {
+            city2Popup += "<br>Capital of the Commonwealth of Kentucky";   
+        }
 //        
-//        L.marker([city2Lat,city2Lon]).addTo(map)
-//            .bindPopup(city2Popup);
+        L.marker([city2Lat,city2Lon]).addTo(map)
+            .bindPopup(city2Popup);
         
-//         CITY3 MARKER CODE HERE
-//        var city3Popup = "<b>"+city3Name+"</b><br>"
-//                        +"<b>population</b>: "+city3Pop;
+//            CITY3 MARKER CODE HERE
+        var city3Popup = "<b>"+city3Name+"</b><br>"
+        +"<b>population</b>: "+city3Pop;
 //        
-//        if(city3Capital == true) {
-//            city3Popup += "<br>Capital of the Commonwealth of Kentucky";   
-//        }
+        if(city3Capital == true) {
+            city3Popup += "<br>Capital of the Commonwealth of Kentucky";   
+        }
 //        
-//        L.marker([city3Lat,city3Lon]).addTo(map)
-//            .bindPopup(city3Popup);
+        L.marker([city3Lat,city3Lon]).addTo(map)
+            .bindPopup(city3Popup);
           
     </script>
     
