@@ -3,13 +3,12 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 03 Starter Template</title>
+    <title>KENTUCKY'S FOREMOST CITIES</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 
     <style>
         body {
@@ -26,6 +25,7 @@
             display: inline-block;
             margin-right: 20px;
             color: #C7AFBD;     
+            text-transform: capitalize;
         }
         h2 {
             display: inline-block;
@@ -49,13 +49,12 @@
             font-weight: bold;
             text-decoration: none;
         }
-        /* Additional style rules go here! */
     </style>
 </head>
 
 <body>
     <header>
-        <h1>KENTUCKY'S FOREMOST CITIES</h1>
+        <h1>Kentucky's Foremost Cities</h1>
         <h2>Land of Tobacco Farms, Bourbon and The Kentucky Derby!</h2>
     </header>
 
@@ -94,17 +93,12 @@
         });
         map.addLayer(tiles);
         
-        // BEGIN WRITING CODE FOR LAB 03 HERE
-        var city1Name = "Lexington";
-        console.log(city1Name);
-        var city1Lat = 38.070995;
-        console.log(city1Lat);
-        var city1Lon = -84.593925;
-        console.log(city1Lon);
-        var city1Pop = 308428;
-        console.log(city1Pop);
-        var city1Capital = "Lexington";
-        console.log(!true);
+    
+        var city1Name = "Lexington",
+            city1Lat = 38.070995,
+            city1Lon = -84.593925,
+            city1Pop = 308428,
+            city1Capital = false;
         
         var city2Name = "Frankfort";
         console.log(city2Name);
@@ -114,7 +108,7 @@
         console.log(city2Lon);
         var city2Pop = 25527;
         console.log(city2Pop);
-        var city2Capital = "Frankfort"
+        var city2Capital = true;
         console.log(!false);
         
         var city3Name = "Louisville"
@@ -125,20 +119,18 @@
         console.log(city3Lon);
         var city3Pop = 756832;
         console.log(city3Pop);
-        var city3Capital = "Louisville";
+        var city3Capital = true;
         console.log(!true);
         
-        var totalPop = [city1Pop + city2Pop + city3Pop];
+        var totalPop = city1Pop + city2Pop + city3Pop; // doesn't need to be an array
         console.log("The total population of these cities is:", totalPop);
         
-        var averagePop = [totalPop/3];
+        var averagePop = totalPop/3; // doesn't need to be an array
         console.log("The average population of these cities is:", averagePop);
         
         var cities = ["Lexington", "Frankfort", "Louisville"];
         console.log(cities[2]);
         
-        
-        // END WRITING CODE FOR LAB 03 HERE
         
         // CITY1 MARKER CODE HERE
         var city1Popup = "<b>"+city1Name+"</b><br>"
