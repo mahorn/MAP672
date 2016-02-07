@@ -15,21 +15,23 @@
         body {
             margin: 0;
             padding: 0;
-            background: whitesmoke;
-            font-family: Lato, sans-serif;
-            color: #0D0000;
+            background: #1d2120;
+            font-family: Droid Sans, fantasy;
+            color: #ba9077;
         }
         header {
             padding: 6px 10%;
         }
         h1 {
             display: inline-block;
-            margin-right: 20px;
-            color: #001323;
+            margin-right: 30px;
+            font-size: 3em;
+            color: #bcd5d1;
         }
         h2 {
             display: inline-block;
-            color: #001323;
+            font-size: 1.6em;
+            color: #ba9077;
         }
         #map {
             width: 80%;
@@ -41,8 +43,8 @@
             width: 80%;
         }
         p {
-            font-size: 1em;
-            color: #001323;
+            font-size: 1.2em;
+            color: #bcd5d1;
         }
         /* Additional style rules go here! */
 
@@ -51,17 +53,18 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Discovering Bolivia</h1>
+        <h2>An extraordinary experience</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.
-        </p>
+        <p>Map authored by Maria Renee Horn</p>
+        <p>Bolivia is one of the eight countries of the world's richest biodiversity.  Few countries in the world possess as great a diversity of ecosystems as Bolivia.  Bolivia includes four major biomes: tropical forests, high Andean grassland plains, savannas and wetlands. The tropical forests of Bolivia are found in the departments of Santa Cruz, and Pando, and northern areas of La Paz and Chochabamba.  These Biomes can be subdivided into 12 ecoregions and their regional subtypes.</p>
+         
+        <p>Because of its exceptional ecosystem diversity and location in the tropics, Bolivia has high biological diversity at the species level. This "megadiverse" country is likely among the top 10 countries in the world in terms of species and ecosystem diversity.   Biological inventories indicate that Bolivia has more than 20,000 species of plants, 356 species of mammals, approximately 1,400 species of birds, 266 species of reptiles, 203 species of amphibians, and 550 species of fish. Invertebrates in general have not been well researched, but Bolivia may place fourth in the world in number of butterfly species (FAN Bolivia, 2008).  New species countinue to be identified in Bolivia, including charismatic mammalian species such as the recently discovered Golden Palace Monkey (Callicebus aureipalatii) (WCS, 2005).</p>
+        
     </footer>
 
     <script>
@@ -69,8 +72,8 @@
         var targetDiv = 'map';
 
         var options = {
-            center: [0, 0],
-            zoom: 2
+            center: [-17, -66],
+            zoom: 7
         }
         map = L.map(targetDiv, options);
         var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
@@ -80,21 +83,29 @@
         
         // begin writing/editing Lab 04 code here
         
+        var cities = ["Santa Cruz de la Sierra", "Cochabamba", "La Paz"],
+            cityCoords = [
+            [-17.7862900, -63.1811700],
+            [-17.3895000, -66.1568000],
+            [-16.5000000, -68.1500000]
+        ];  
+            cityPops = [1364389, 900414, 812799],
+            cityCapital = [false, false, true];
 
-//        for(/* add code here */) {
-//            
-//            var popup = "<b>"+/* add code here */+"</b><br>"
-//                            +"<b>population</b>: "+/* add code here */;
-//
-//            if(/* add code here */) {
-//               
-//                popup += "<br>Is the capital city."; 
-//                
-//            } 
-//            
-//            L.marker(/* add code here */).addTo(map)
-//                .bindPopup(popup);
-//        }
+        for(var i = 0; i < cities.length; i++) {
+            
+            var popup = "<b>"+cities[i]+"</b><br>"
+                            +"<b>population</b>: "+cityPops[i];
+
+            if(cityCapital[i] == true) {
+               
+                popup += "<br>Is the Political Capital City of Bolivia."; 
+                
+            } 
+            
+            L.marker(cityCoords[i]).addTo(map)
+                .bindPopup(popup);
+        }
         
         // end writing/editing Lab 04 code here
         
