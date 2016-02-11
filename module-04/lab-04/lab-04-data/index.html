@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 04 Starter Template</title>
+    <title>Discovering Bolivia</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -16,7 +16,7 @@
             margin: 0;
             padding: 0;
             background: #1d2120;
-            font-family: Droid Sans, fantasy;
+            font-family: "Droid Sans", fantasy;  /* put multi-word fonts in quotations */
             color: #ba9077;
         }
         header {
@@ -46,7 +46,6 @@
             font-size: 1.2em;
             color: #bcd5d1;
         }
-        /* Additional style rules go here! */
 
     </style>
 </head>
@@ -81,7 +80,6 @@
 });
         map.addLayer(tiles);
         
-        // begin writing/editing Lab 04 code here
         
         var cities = ["Santa Cruz de la Sierra", "Cochabamba", "La Paz"],
             cityCoords = [
@@ -106,8 +104,6 @@
             L.marker(cityCoords[i]).addTo(map)
                 .bindPopup(popup);
         }
-        
-        // end writing/editing Lab 04 code here
         
           
     </script>
