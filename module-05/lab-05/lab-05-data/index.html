@@ -91,56 +91,58 @@
 
     function prepareData(lexArea, verArea, midArea) { 
 
-        var cities = ["Lexington", "Versailles", "Midway"];
+        var cities = ["Lexington", "Versailles", "Midway"]; 
+        
         var cityCoords = [
-            [38.0297, -84.4947], 
+            [38.0297, -84.4947],
             [38.0547, -84.7308],
             [38.1552, -84.6790]
         ];
-        var cityPops = [308428, 8949, 1657];
-        var cityAreas = [285.5, 2.8, 1.1]; 
+        
+        var cityPops = [308428, 8949, 1657]; 
 
+        var cityAreas = [lexArea, verArea, midArea]; 
+        
         mapCities(cities, cityCoords, cityPops, cityAreas);
+
     }
 
     function mapCities(cities, cityCoords, cityPops, cityAreas) { 
 
         var units = prompt('Units for calculating density', 'Enter "miles" or "km"');
 
-        for(var i = 0; i < cities.length; i++) {
+            for(var i = 0; i < cities.length; i++) {
+                
+        var density = calcPopDensity(cityPops, cityAreas, units);
+                
+                console.log(density);
+                
+        calcPopDensity(cityPops, cityAreas, units);
 
-        var density = calcPopDensity(cityPops, cityAreas, units);     
-            
-            console.log(density); 
-            
-            calcPopDensity(cityPops[i], cityAreas[i], units[i]);
-            
-        var popup = "<b>"+cities[i]+"</b><br>"
-                            +"<b>Density</b>: "+density.toLocaleString(density[i])+" people per sq " + units;
+        var popup = "<b>"+cities[i]+"</b><br>"+"<b>Density</b>: "+(cityPops[i]/cityAreas[i])+" people per sq " + units;
 
             L.marker(cityCoords[i]).addTo(map)
                 .bindPopup(popup);
+                
         }
     }
 
     function calcPopDensity(cityPops, cityAreas, units) {
         
-        var units = "miles";
-        if(units === "miles") {
-            console.log(cityPops/cityAreas);
-        } else if (units === "km") {
-            console.log(cityPops/cityAreas * 0.6214);
-        } else {
-            console.log('the value of units must be miles or km');
-        } 
+        var density = cityPops[i]/cityAreas[i];
         
+        var units = "miles"; 
         for(var i = 0; i < units.length; i++) {
-            
-            var density = cityPops[i] / cityAreas[i];
-           
-            return density;
-        
+            if(units === "miles") {
+                console.log(cityPops[i]/cityAreas[i]);
+            } else if(units === "km") {
+                console.log(cityPops[i]/cityAreas[i]);
+            } else {
+                console.log('the value of units must be miles or km');
+            }  
         }
+            return density;
+    
     }
 
     // end writing/editing Lab 05 code here
