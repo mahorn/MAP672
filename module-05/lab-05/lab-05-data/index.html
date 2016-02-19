@@ -15,9 +15,9 @@
         body {
             margin: 0;
             padding: 0;
-            background: whitesmoke;
-            font-family: Lato, sans-serif;
-            color: #0D0000;
+            background: #64706c;
+            font-family: "Andale mono";   
+            color: #334431;
         }
         header {
             padding: 6px 10%;
@@ -25,11 +25,15 @@
         h1 {
             display: inline-block;
             margin-right: 20px;
-            color: #001323;
+            font-size: 2.5em;
+            font-family: "Andale mono"; 
+            color: #30231d;
         }
         h2 {
             display: inline-block;
-            color: #001323;
+            font-size: 1.6em;
+            font-family: "Andale mono";
+            color: #30231d;
         }
         #map {
             width: 80%;
@@ -41,31 +45,41 @@
             width: 80%;
         }
         p {
-            font-size: 1em;
-            color: #001323;
+            font-size: 1.3em;
+            font-family: "Andale mono";
+            color: #c7ad88;
         }
-        /* Additional style rules go here! */
-        
-
+        a {
+            font-size: 0.6em;
+            font-family: "Andale mono";
+            color:#30231d;
+        } 
     </style>
-</head>
+    
+    </head>
 
-<body>
+    <body>
+        
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Midway</h1>
+        <h2>"A unique friendly and quaint town"</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.
-        </p>
-    </footer>
-
-<script>
+        <p>Map authored by Maria Renee Horn</p>
+        <p>As most of Central Kentucky knows, Historic Midway was the first town in Kentucky founded by a railroad,              but the town’s history began long before that when the area was inhabited by Indian Mound Builders. Two              large Indian mounds have been identified on farms nearby Midway, as well as several smaller such                      structures in the outlying areas where they still exist today. Settlers visited the area as early as 1771            when Kentucky was still part of Virginia. Many of them were surveyors and liked the land so well that they            stayed. By 1788, residents successfully fought to break off from Fayette County to form Woodford County.              </p>     
+        <p>Nearly 45 years passed before the town of Midway came into existence. Then, when the Lexington and Ohio              Railroad was incorporated in 1830, the town became a hub of activity with the accompanying construction.              Lodging was needed for the railroad workmen as well as food, supplies, and other dry goods. By 1832, the              railroad carried its first passengers from Lexington with horse drawn cars. The line was completed to                Frankfort in 1834 and by January 1835 the first steam locomotive passed through Midway (also know as                  Middleway) from Lexington, bound for Frankfort. Both cities celebrated the successful journey of the “Iron            Horse” with a grand ball. Many accounts of those early years of the railroad related tales of the                    engineers not only stopping for water and wood, but also to open and shut farm gates, since the train                traveled through private pastures.
+           It was around this time that the town of Midway was surveyed and laid out by the railroad company. In                honor of their work, many of the streets in Midway were named after the railroad company directors. These            streets continue to exist today.</p>
+        <p>Midway continued to prosper along with the railroad. Electricity was introduced in 1911. In 1915, a fire              destroyed a large part of the south side of Railroad Street. During the railroad’s heyday, the 1930’s and            40’s, up to 30 trains a day rumbled through the middle of town. The passenger trains dwindled until the              old depot (located where the caboose now stands) was closed in 1963. The last passenger train traveled                through in May 1971.
+           Midway’s downtown followed the railroad’s fortunes and by the late 1960’s and early 1970’s the few                    remaining businesses primarily served the local agricultural community.</p>
+        <p>Revitalization and rebirth began in the mid 1970’s when several antique shops and galleries were                      established and the Midway I Village Guild was formed. In 1978, 176 buildings in Midway were placed on the            National Register of Historic Places. Now, Historic Midway once again thrives and enjoys its present                  reputation as one of Kentucky’s favorite spots for antiques, crafts, gifts, restaurants, and clothing.                Several freight trains still make use of the active tracks running through Railroad Street, preserving                Midway’s unique history and atmosphere.
+           Today, Midway continues to be a uniquely friendly and quaint town with a noticeable spirit. Embellished              with local shops, cozy tea rooms, restaurants, and beautiful local architecture, the streets of Midway                offer visitors an exceptional, relaxing experience. Because of its special charm and small town appeal                visitors always leave Midway in high spirits.</p>    
+        <p><a href="https://http://meetmeinmidway.com/history-of-midway/">Meet me in Midway</a></p>
+    </footer> 
+        
+    <script>
     
     var options = {
         center: [38.0489,-84.5025],
@@ -75,17 +89,15 @@
     var map = L.map('map', options);
     
     var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a                     href="http://cartodb.com/attributions">CartoDB</a>',
         subdomains: 'abcd',
         maxZoom: 19
     });
     map.addLayer(tiles);
 
-    // begin writing/editing Lab 05 code here
-
-    var lexArea = Number(prompt("Enter data", "Enter the area of Lexington in square miles"));
-    var verArea = Number(prompt("Enter data", "Enter the area of Versailles in square miles"));
-    var midArea = Number(prompt("Enter data", "Enter the area of Midway in square miles"));
+        var lexArea = Number(prompt("Enter data", "Enter the area of Lexington in square miles"));
+        var verArea = Number(prompt("Enter data", "Enter the area of Versailles in square miles"));
+        var midArea = Number(prompt("Enter data", "Enter the area of Midway in square miles"));
 
     prepareData(lexArea, verArea, midArea); 
 
@@ -104,47 +116,42 @@
         var cityAreas = [lexArea, verArea, midArea]; 
         
         mapCities(cities, cityCoords, cityPops, cityAreas);
-
     }
 
     function mapCities(cities, cityCoords, cityPops, cityAreas) { 
 
         var units = prompt('Units for calculating density', 'Enter "miles" or "km"');
-
+        
             for(var i = 0; i < cities.length; i++) {
                 
-        var density = calcPopDensity(308428, lexArea, units);
+        var density = calcPopDensity(cityPops[i], cityAreas[i], units);
                 
-                console.log(density);
+            console.log(density);
                 
         calcPopDensity(cityPops, cityAreas, units);
 
-        var popup = "<b>"+cities[i]+"</b><br>"+"<b>Density</b>: "+(cityPops[i]/cityAreas[i])+" people per sq " + units;
+        var popup = "<b>"+cities[i]+"</b><br>"+"<b>Density</b>: "+density.toLocaleString(calcPopDensity[i])+" people         per sq " + units;
 
             L.marker(cityCoords[i]).addTo(map)
-                .bindPopup(popup);
-                
+                .bindPopup(popup);         
         }
     }
 
     function calcPopDensity(cityPops, cityAreas, units) {
-              
-        
-        var units = "miles";
-            if(units === "miles") {
-             console.log();
-         } else if(units === "km") {
-             console.log([cityPops/cityAreas] * 1.60934);
-         } else {
-             console.log('the value of units must be either miles or km');
-         }
         
         var density = cityPops / cityAreas;
-            return density;
+        
+        var units = "miles";
+                 
+             if(units == "miles")
+                 
+             return density;
+        
+             if(units == "km")
+                  
+             return density * 1.6;      
     }
-
-    // end writing/editing Lab 05 code here
-
+        
 </script>
     
 </body>
