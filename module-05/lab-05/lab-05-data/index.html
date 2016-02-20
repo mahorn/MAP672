@@ -122,13 +122,13 @@
 
         var units = prompt('Units for calculating density', 'Enter "miles" or "km"');
         
-            for(var i = 0; i < cities.length; i++) {
+        for(var i = 0; i < cities.length; i++) {
                 
-        var density = calcPopDensity(cityPops[i], cityAreas[i], units);
+            var density = calcPopDensity(cityPops[i], cityAreas[i], units);
                 
             console.log(density);
 
-        var popup = "<b>"+cities[i]+"</b><br>"+"<b>Density</b>: "+density.toLocaleString(calcPopDensity[i])+" people         per sq " + units;
+            var popup = "<b>"+cities[i]+"</b><br>"+"<b>Density</b>: "+density.toLocaleString(calcPopDensity[i])+" people         per sq " + units;
 
             L.marker(cityCoords[i]).addTo(map)
                 .bindPopup(popup);         
@@ -137,13 +137,16 @@
 
     function calcPopDensity(cityPops, cityAreas, units) {    
             
-        var density = cityPops / cityAreas;
+      
+        // you don't want to reassign the value of units here
+        // because then it will definitely be miles below. 
+        // it's entering this funciton as either 'miles' or 'km'
         
-        var units = "miles";
+        //var units = "miles"; 
             if(units === "miles") {    
-               return density;
+               return cityPops / cityAreas;
             } else if(units === "km"){
-                return density * 1.609;
+                return cityPops / (cityAreas * 2.59);  // calculate area for *square* kilometers
         } 
         
     }    
