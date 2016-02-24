@@ -47,6 +47,12 @@
         .kentucky-blue {
             color: #165bb6;
         }
+        .ohio-red {
+            color: #ff0030;
+        }
+        .indiana-yellow {
+            color: #ffd000;
+        }
         
     </style>
 </head>
@@ -89,11 +95,70 @@
                      population: 756832,
                      state: "KY"
                  }
-             }    
+             },{
+                 name: "Cincinnati",
+                 properties: {
+                     coordinates: [39.10, -84.5167],
+                     population: 297517,
+                     state: "OH"
+                }
+             },{
+                 name: "Indianapolis",
+                 properties: {
+                     coordinates: [39.7910, -86.1480],
+                     population: 852866,
+                     state: "IN"
+                 }
+             }
         ];
-            
-        
           
+        
+        
+        for (var i = 0; i <cities.length; i++) {
+           // console.log(cities[i].properties);
+           //console.log(cities[i].properties.population);
+            
+            var props = cities[i].properties;
+                // console.log(props);
+            
+            var popup = buildPopup(name[i], pop[i], state[i]);
+               
+                console.log(popup);
+            
+            L.marker(props.coordinates).addTo(map)
+                    .bindPopup(popup);
+        
+        }
+        
+        function buildPopup(name, pop, state) {
+            
+             if(name == "Louisville") {
+                var state = "KY"; 
+                    if(state == "KY") {
+                        var colorClass = "kentucky-blue";
+                    }
+                 
+                } if (name == "Cincinnati") {
+                    var state = "OH"; 
+                        if(state == "OH") {
+                            var colorClass = "ohio-red";
+                        }
+            
+                } if (name == "Indianapolis") {
+                    var state = "IN";
+                        if(state == "IN") {
+                            var colorClass = "indiana-yellow";
+                        }
+                    }
+        }
+               
+            return "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
+                       "<b>Population</b>: "+pop.toLocaleString()+"<div>";
+            
+        }
+        
+    
+           
     </script>
     
 </body>
