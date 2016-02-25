@@ -121,7 +121,7 @@
             var props = cities[i].properties;
                 // console.log(props);
             
-            var popup = buildPopup(name[i], props.population[i], props.state[i]);
+            var popup = buildPopup(cities[i].name, props.population, props.state);
                
                 console.log(popup);
             
@@ -132,24 +132,23 @@
         
         function buildPopup(name, pop, state) {
             
-            if(name === "Louisville") {
-              return state == "KY";
-                if(state === "KY") {
-                    var colorClass = "kentucky-blue";
+            if(state == "KY") {
+                var colorClass = "kentucky-blue"; {
+                    return "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
+                           "<b>Population</b>: "+pop.toLocaleString(buildPopup)+"<div>";
                 }
-           } else if(name === "Cincinnati") {
-               return state == "OH";
-                if(state === "OH");
-                    var colorClass = "ohio-red";
-           } else if(name === "Indianapolis") {
-               return state == "IN";
-                if(state === "IN") {
-                    var colorClass = "indiana-yellow";a
+            } else if(state == "OH") {
+                var colorClass = "ohio-red"; {
+                    return "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
+                           "<b>Population</b>: "+pop.toLocaleString(buildPopup)+"<div>"; 
                 }
-           } 
-           
-            return popup + "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
-                            "<b>Population</b>: "+pop.toLocaleString(buildPopup)+"<div>";
+            } else if(state == "IN"){
+                var colorClass = "indiana-yellow";{
+                    return"<div class='"+colorClass+"'><b>"+name+"</b><br>"+
+                           "<b>Population</b>: "+pop.toLocaleString(buildPopup)+"<div>"; 
+                }
+            }          
+         
         }
                     
            
