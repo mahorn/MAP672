@@ -121,7 +121,7 @@
             var props = cities[i].properties;
                 // console.log(props);
             
-            var popup = buildPopup(name[i], pop[i], state[i]);
+            var popup = buildPopup(name[i], props.population[i], props.state[i]);
                
                 console.log(popup);
             
@@ -132,32 +132,26 @@
         
         function buildPopup(name, pop, state) {
             
-             if(name == "Louisville") {
-                var state = "KY"; 
-                    if(state == "KY") {
-                        var colorClass = "kentucky-blue";
-                    }
-                 
-                } if (name == "Cincinnati") {
-                    var state = "OH"; 
-                        if(state == "OH") {
-                            var colorClass = "ohio-red";
-                        }
-            
-                } if (name == "Indianapolis") {
-                    var state = "IN";
-                        if(state == "IN") {
-                            var colorClass = "indiana-yellow";
-                        }
-                    }
+            if(name === "Louisville") {
+              return state == "KY";
+                if(state === "KY") {
+                    var colorClass = "kentucky-blue";
+                }
+           } else if(name === "Cincinnati") {
+               return state == "OH";
+                if(state === "OH");
+                    var colorClass = "ohio-red";
+           } else if(name === "Indianapolis") {
+               return state == "IN";
+                if(state === "IN") {
+                    var colorClass = "indiana-yellow";a
+                }
+           } 
+           
+            return popup + "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
+                            "<b>Population</b>: "+pop.toLocaleString(buildPopup)+"<div>";
         }
-               
-            return "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
-                       "<b>Population</b>: "+pop.toLocaleString()+"<div>";
-            
-        }
-        
-    
+                    
            
     </script>
     
