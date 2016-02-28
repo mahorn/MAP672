@@ -65,7 +65,147 @@
     <script>
 
       // build your Leaflet map here!
-                  
+    
+//        var mapCenter = L.latLng(38.0489, -96.5025);
+        
+//        var otherCity = L.latLng(38.1489, -96.5125);
+         
+//        var distance = mapCenter.distanceTo(otherCity);
+        
+//        console.log(distance);
+        
+//        var options = {
+//            center: [38.0489, -96.5025],
+//            zoom: 4,
+//            minZoom: 4,
+//            maxZoom: 7,
+//            dragging: false,
+//            zoomControl: false
+//        }
+        
+//        var map = L.map('map', options);
+        
+        var map = L.map('map');
+        map.setView([38.0297, -89.4947], 4);
+        
+        var tiles = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+            maxZoom: 13,
+            attribution: '&copy; <ahref="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        });    
+        
+        map.addLayer(tiles);
+        
+        map.on('click', function(e) {
+            console.log(e.latlng);
+        });
+        
+        var center = map.getCenter();
+        console.log(center.lat, center.lng);
+      
+        var zoom = map.getZoom();
+        console.log(zoom);
+       
+        var bounds = map.getBounds();
+        console.log(bounds);
+        
+        var bounds = map.getBounds();
+        
+        var bottomLeft = bounds.getSouthWest();
+        console.log(bottomLeft.lat, bottomLeft.lng);
+        
+        L.marker([38.0297, -89.4947]).addTo(map);
+        
+ //       var redIguanaLocation = L.latLng(40.7718, -111.9124);
+        
+  //      var iguanaRestaurants = L.layerGroup();
+ //       var redIguana = L.circle([40.7718, -111.9124], 400);
+  //      redIguana.addTo(iguanaRestaurants);
+ //       var blueIguana = L.circle([40.7657, -111.8930], 300);
+ //       blueIguana.addTo(iguanaRestaurants);
+//        iguanaRestaurants.addTo(map);
+        
+//        iguanaRestaurants.eachLayer(function(layer) {
+ //           layer.on('mouseover', function(e) {
+ //               e.target.setStyle({
+ //                   color: 'yellow',
+  //                  fillColor: 'yellow'
+ //       });
+ //    });
+//            layer.on('mouseout', function(e) {
+ //               e.target.setStyle({
+ //                   color: '#03f',
+//                    fillColor: '#03f'
+ //               });
+//            });
+//});
+    
+  //      redIguanaCircle.setStyle({
+   //        color:"#d72b1e",
+   //         weight: 15,
+   //         fillColor: "#d72b1e",
+    //        fillOpacity: 1
+   //     });
+        
+  //      var redIguanaMarker = L.marker(redIguanaLocation, {
+ //           draggable: true,
+ //           opacity: .3
+ //       });
+//        
+//        var redIguanaMarker = L.marker(redIguanaLocation);
+ //       redIguanaMarker.addTo(map);
+ //       redIguanaMarker.on('drag', function(e) {
+  //          console.log(e.target.getLatLng());
+  //      });
+        
+  //      redIguanaMarker.bindPopup("Best Mexican food in Salt Lake City!");
+         
+        
+//        grouping iguanaRestaurants together
+        var iguanaRestaurants = L.layerGroup();
+            
+//        defining object redIguana as red
+        var redIguanaOptions = {
+            color: 'red',
+            fillColor: 'red'
+        };
+        
+//        defining object blueIguana as blue
+        var blueIguanaOptions = {
+            color: '#03f',
+            fillColor: '#03f'
+        };
+
+//        creating a vector layer circle with its own coordinates, radius and assigning its color             as red 
+        var redIguana = L.circle([40.7718,-111.9124], 400, redIguanaOptions);
+        redIguana.color = 'red';
+        redIguana.addTo(iguanaRestaurants);
+        
+//        creating a different vector layer cicle with its own coordinates, radius and assigning             its color as blue
+        var blueIguana = L.circle([40.7657, -111.8930], 300, blueIguanaOptions);
+        blueIguana.color = 'blue';
+        blueIguana.addTo(iguanaRestaurants);
+        iguanaRestaurants.addTo(map);
+
+//        changing color to vector layers when mouseover
+        iguanaRestaurants.eachLayer(function(layer) {
+            layer.on('mouseover', function(e) {
+                e.target.setStyle({
+                    color: 'yellow',
+                    fillColor: 'yellow'
+             });
+        });
+//            returning to original vector layers color when mouseout with a conditional statement
+            layer.on('mouseout', function(e) {
+                if(e.target.color == 'red') {
+                    e.target.setStyle(redIguanaOptions);
+                } else if (e.target.color == 'blue') {
+                    e.target.setStyle(blueIguanaOptions);      
+                }
+            });
+        });  
+        
+        
+              
     </script>
     
 </body>
