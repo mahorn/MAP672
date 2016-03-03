@@ -66,18 +66,50 @@
     </footer>
 
     <script>
-
-    var map = L.map('map', {
-        center: [40,-94],
-        zoom: 4
+    
+    var options = {
+        center: [40, -94],
+        zoom: 4,
+        minZoom: 4,
+        maxZoom: 12
+    }
+        
+    var map = L.map('map', options);
+        
+    var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+        maxZoom: 16
     });
+        
+        tiles.addTo(map);   
                 
     var redIguana = L.latLng(40.7718,-111.9124);
         
-    map.on('click', function(e){
-        console.log(e.latlng);   
-    });
-                  
+        map.on('click', function(e){  
+           var myMap = (e.latlng);
+            map.setView((myMap), 6);
+           // console.log(myMap);
+            var distance = myMap.distanceTo(redIguana);
+            console.log(distance);
+            
+         
+           
+    
+   });
+    
+    
+     
+      
+        
+       var myMarker = L.marker([40.7718,-111.9124], {
+            draggable: true,
+            opacity: 0.5
+        }).addTo(map);    
+    
+        myMarker.on('dragend', function(e) {
+           console.log(myMarker.getLatLng());
+       })
+        
     </script>
     
 </body>
