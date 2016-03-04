@@ -137,21 +137,15 @@
         function buildPopup(name, pop, state) {
             
             if(state == "KY") {
-                var colorClass = "kentucky-blue"; {
-                    return "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
-                           "<b>Population</b>: "+pop.toLocaleString(buildPopup)+"<div>";
-                }
+                var colorClass = "kentucky-blue"; 
             } else if(state == "OH") {
-                var colorClass = "ohio-red"; {
-                    return "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
-                           "<b>Population</b>: "+pop.toLocaleString(buildPopup)+"<div>"; 
-                }
+                var colorClass = "ohio-red"; 
             } else if(state == "IN"){
-                var colorClass = "indiana-yellow";{
-                    return"<div class='"+colorClass+"'><b>"+name+"</b><br>"+
-                           "<b>Population</b>: "+pop.toLocaleString(buildPopup)+"<div>"; 
-                }
-            }            
+                var colorClass = "indiana-yellow";
+            } 
+          
+            return"<div class='"+colorClass+"'><b>"+name+"</b><br>"+
+                           "<b>Population</b>: "+pop.toLocaleString()+"<div>"; 
         }
                        
     </script>
