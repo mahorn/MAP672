@@ -31,7 +31,7 @@
         h2 {
             display: inline-block;
             color: goldenrod;
-            font-size: 2em;
+            font-size: 1.5em;
         }
         #map {
             width: 80%;
@@ -59,8 +59,8 @@
 
 <body>
     <header>
-        <h1>U.S. Petroleum and Natural Gas:</h1>
-        <h2>Power Plant Distribution</h2>
+        <h1>U.S. Power Plant Distribution:</h1>
+        <h2>Solar, Geothermal, Hydro, Wind & Petroleum</h2>
     </header>
 
     <div id='map'></div>
@@ -69,7 +69,7 @@
         <p>Map authored by Maria Renee Horn</p>
         <p>Map source: <a href="http://www.eia.gov/electricity/data/eia923/">U.S. Energy Information Administration</a></p> 
         <center> d </center>
-        <p>Distribution of location and capacity of Petroleum and Natural Gas power plants in the United States.</p>
+        <p>Distribution of location and capacity of Solar, Geothermal, Hydro, Wind & Petroleum power plants in the United           States.</p>
         <p>Plant production capacity is shown as total megawatts per type of fuel.</p>
     </footer>
 
@@ -82,10 +82,10 @@
       });
       
       var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a                                         href="http://cartodb.com/attributions">CartoDB</a>',
-          subdomains: 'abcd',
-          maxZoom: 19
-      });  
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+	subdomains: 'abcd',
+	maxZoom: 19
+});
       
       tiles.addTo(map);
         
@@ -108,18 +108,44 @@
                 }
           },
           style: function(feature) {
-              if(feature.properties.fuel_source.Petroleum &&
-                 feature.properties.fuel_source['Natural Gas']){
+              if(feature.properties.fuel_source.Solar) {
+                  return {
+                      color: 'yellowgreen',
+                      fillColor: 'yellowgreen'
+                 } 
+              } else if(feature.properties.fuel_source.Geothermal) {
+                  return {
+                      color: 'white',
+                      fillColor: 'white'
+                  }
+              } else if(feature.properties.fuel_source.Hydro) {
+                  return {
+                      color: 'thistle',
+                      fillColor: 'thistle'
+                  }
+              } else if(feature.properties.fuel_source.Wind) {
+                  return {
+                      color: 'goldenrod',
+                      fillColor: 'goldenrod'
+                  }
+              } else if(feature.properties.fuel_source.Petroleum) {
                   return {
                       color: 'cyan',
                       fillColor: 'cyan'
-                 }
-              } 
+                  }
+              }
           },
           filter: function(feature, layer) {
-              if(feature.properties.fuel_source.Petroleum &&
-                feature.properties.fuel_source['Natural Gas']) {
-                   return feature;
+              if(feature.properties.fuel_source.Solar){
+                  return feature;
+              } else if(feature.properties.fuel_source.Geothermal) {
+                  return feature;
+              } else if(feature.properties.fuel_source.Hydro) {
+                  return feature;
+              } else if(feature.properties.fuel_source.Wind) {
+                  return feature;
+              } else if(feature.properties.fuel_source.Petroleum) {
+                  return feature;
               }
           },
           onEachFeature: function (feature, layer) {
@@ -133,8 +159,9 @@
                       fillColor: 'cyan'
               });
           });
-              layer.bindPopup('<center>' + "Plant Name: " + feature.properties.plant_name + '<br><center> Total Capacity: '               + feature.properties.capacity_mw + " MW" + "<br><center> Petroleum: " +                                                       feature.properties.fuel_source.Petroleum + " MW" + "<br><center> Natural Gas: " +                                           feature.properties.fuel_source['Natural Gas'] + " MW")
-          } 
+              layer.bindPopup('<center>' + "Plant Name: " + feature.properties.plant_name + '<br><center> Total Capacity: '               + feature.properties.capacity_mw + " MW")
+          }
+          
         }).addTo(map);
               
     </script>
