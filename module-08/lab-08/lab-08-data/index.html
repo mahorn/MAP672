@@ -15,9 +15,9 @@
         body {
             margin: 0;
             padding: 0;
-            background: whitesmoke;
-            font-family: Lato, sans-serif;
-            color: #0D0000;
+            background: black;
+            font-family: Papyrus;
+            color: 'lime';
         }
         header {
             padding: 6px 10%;
@@ -25,39 +25,52 @@
         h1 {
             display: inline-block;
             margin-right: 20px;
-            color: #001323;
+            color: darkcyan;
+            font-size: 2.9em;
         }
         h2 {
             display: inline-block;
-            color: #001323;
+            color: goldenrod;
+            font-size: 2em;
         }
         #map {
             width: 80%;
             height: 540px;
             margin: 10px auto;
+            font-weight: bold;
         }
         footer {
             padding: 6px 10%;
             width: 80%;
         }
         p {
-            font-size: 1em;
-            color: #001323;
+            font-size: 1.3em;
+            color: gray;
+            font-family: Papyrus;
+            text-align: center;
+        }
+        a {
+            font-family: Papyrus;
+            color:goldenrod;
+            font-size: 0.7em;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>U.S. Petroleum and Natural Gas:</h1>
+        <h2>Power Plant Distribution</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
+        <p>Map authored by Maria Renee Horn</p>
+        <p>Map source: <a href="http://www.eia.gov/electricity/data/eia923/">U.S. Energy Information Administration</a></p> 
+        <center> d </center>
+        <p>Distribution of location and capacity of Petroleum and Natural Gas power plants in the United States.</p>
+        <p>Plant production capacity is shown as total megawatts per type of fuel.</p>
     </footer>
 
     <script src="power-plants.js"></script>
@@ -69,7 +82,7 @@
       });
       
       var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a                                         href="http://cartodb.com/attributions">CartoDB</a>',
           subdomains: 'abcd',
           maxZoom: 19
       });  
@@ -86,51 +99,44 @@
                  color: 'orange',
                  weight: 1,
                  fillColor: 'yellow',
-                 fillOpacity: .7,
+                 fillOpacity: .5,
                  radius: getRadius(feature.properties.capacity_mw)
-              }); 
-              
+                });  
               function getRadius(area) {
-            var radius = Math.sqrt(area/Math.PI);
-          return radius * .6;           
-      }
-             
+                var radius = Math.sqrt(area/Math.PI);
+                  return radius * .6;           
+                }
           },
-          style: function(feature, layer) {
-              if(feature.properties.fuel_source.Petroleum) {
-                  return  {
+          style: function(feature) {
+              if(feature.properties.fuel_source.Petroleum &&
+                 feature.properties.fuel_source['Natural Gas']){
+                  return {
                       color: 'cyan',
                       fillColor: 'cyan'
-                  }
-              } else if(feature.properties.fuel_source.Wind) {
-                  return {
-                      color: 'lime',
-                      fillColor:'lime'
-                  }
-              }
+                 }
+              } 
           },
           filter: function(feature, layer) {
-              if(feature.properties.fuel_source.Petroleum) {
-                  return feature;
-              } else if(feature.properties.fuel_source.Wind) {
-                  return feature;
+              if(feature.properties.fuel_source.Petroleum &&
+                feature.properties.fuel_source['Natural Gas']) {
+                   return feature;
               }
           },
           onEachFeature: function (feature, layer) {
               layer.on('mouseover', function(){
                   layer.setStyle({
                       fillColor: 'yellow'
-                  });
               });
+          });
               layer.on('mouseout', function(){
                   layer.setStyle({
                       fillColor: 'cyan'
-                  });
-              });     
-              layer.bindPopup(feature.properties.plant_name + feature.properties.capacity_mw + 'MW')
-          }
-          }).addTo(map);
-                  
+              });
+          });
+              layer.bindPopup('<center>' + "Plant Name: " + feature.properties.plant_name + '<br><center> Total Capacity: '               + feature.properties.capacity_mw + " MW" + "<br><center> Petroleum: " +                                                       feature.properties.fuel_source.Petroleum + " MW" + "<br><center> Natural Gas: " +                                           feature.properties.fuel_source['Natural Gas'] + " MW")
+          } 
+        }).addTo(map);
+              
     </script>
     
 </body>
