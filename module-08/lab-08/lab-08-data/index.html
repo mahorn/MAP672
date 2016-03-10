@@ -93,7 +93,7 @@
           return b.properties.capacity_mw - a.properties.capacity_mw;
       });
       
-      var plants = L.geoJson(plants, {
+      L.geoJson(plants, {
           pointToLayer: function(feature,latlng) {
               return L.circleMarker(latlng, {  
                  color: 'orange',
