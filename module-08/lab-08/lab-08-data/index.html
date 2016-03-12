@@ -102,10 +102,6 @@
                  fillOpacity: .5,
                  radius: getRadius(feature.properties.capacity_mw)
                 });  
-              function getRadius(area) {
-                var radius = Math.sqrt(area/Math.PI);
-                  return radius * .6;           
-                }
           },
           style: function(feature) {
               if(feature.properties.fuel_source.Solar) {
@@ -181,6 +177,11 @@
           }
           
         }).addTo(map);
+        
+        function getRadius(area) {
+            var radius = Math.sqrt(area/Math.PI);
+            return radius * .6;           
+        }
               
     </script>
     
