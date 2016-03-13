@@ -75,6 +75,137 @@
       });  
       
       tiles.addTo(map);
+        
+    var commonStyles = {
+        weight: 0.8,
+        stroke: 0.8,
+        fillOpacity: .6
+    }
+    
+//    function getRadius(area) {
+//        var radius = Math.sqrt(area/Math.PI);
+//        return radius * .6;
+//    }
+        
+//    var hydroLayer = L.geoJson(plants, {
+//        pointToLayer: function(feature, latlng) {
+//            return L.circleMarker(latlng, commonStyles);
+//        },
+//        filter: function(feature) {
+//            if(feature.properties.fuel_source[<variableName>]) {
+//                return feature;
+//            }
+//        },
+//        sytle: function(feature) {
+//            return {
+//                color: <variableName>,
+//                fillColor: <variableName>,
+//                radius: getRadius(feature.properties.fuel_source[<variableName>])
+//            }
+//        }
+//
+//    }).addTo(map);
+//        
+//        var windLayer = L.geoJson(plants, {
+//            pointToLayer: function(feature, latlng) {
+//                return L.circleMarker(latlng, commonStyles);
+//            },
+//            filter: function(feature) {
+//                if(feature.properties.fuel_source[<variableName]) {
+//                    return feature;
+//                }
+//            },
+//            style: function(feature) {
+//                return {
+//                    color: <variableName>,
+//                    fillColor: <variableName>,
+//                    radius: getRadius(feature.properties.fuel_source[<variableName])
+//                }
+//            }
+//            
+//        }).addTo(map);
+        
+       
+        
+//        var sourcesLayers = {
+//        "<b style = 'color: #1f78b4' >Hydro</b>" : hydroLayer,
+//        "<b style = 'color: #a6cee3' >Wind</b>" : windLayer,
+//    }
+//    
+//    L.control.layers(null, sourcesLayers, {collapsed: false}).addTo(map);
+        
+        var layerInfo = {
+            hydroLayer: {source: "Hydro", color: '#1f78b4'},
+            windLayer: {source: "Wind", color: '#a6cee3'}
+        };
+        
+        var geoJsonLayers = {};
+        
+        for(var layer in layerInfo) {
+            geoJsonLayers[layer] = L.geoJson(plants, {
+                pointToLayer: function(feature, latlng) {
+                    return L.circleMarker(latlng, commonStyles);
+            },
+        
+            filter: function(feature) {
+                if(feature.properties.fuel_source[layerInfo[layer].source]) {
+                    console.log(feature);
+                    return feature;
+                }
+            },
+                style: function(feature) {
+                    return {
+                        color: layerInfo[layer].color,
+                        fillColor: layerInfo[layer].color,
+                        radius: getRadius(feature.properties.fuel_source[layerInfo[layer].source])
+                    }
+                }
+        }).addTo(map);
+     }
+            
+      function getRadius(area) {
+        var radius = Math.sqrt(area/Math.PI);
+        return radius * .6;
+    }
+        var sourcesLayers = {
+            "Hydro": geoJsonLayers.hydroLayer,
+            "Wind" : geoJsonLayers.windLayer,
+    }
+    
+    L.control.layers(null, sourcesLayers, {collapsed: false}).addTo(map);
+            
+//        hydroLayer.setStyle({
+//            color: '#a5c9e2',
+//            fillColor: '#a5c9e2'
+//        });
+    
+//        hydroLayer.eachLayer(function(layer) {
+//            
+//            console.log(layer);
+//        });
+    
+        map.on('click', function(e) {
+//////            console.log(e.latlng)
+            geoJsonLayers[layer].eachLayer(function(layer){
+////////                    console.log(layer.getLatLng());
+               var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
+////////                console.log(distance);
+               if(distance > 500) {
+                    layer.setStyle({
+                       stroke: false,
+                       fill: false
+                    });
+                } else {
+                    layer.setStyle({
+                        stroke: true,
+                       fill: true
+                    });
+                }
+           });
+                   layer.bindPopup("I am <b> "+distance.toLocaleString()+ " km</b><br> from the click point.");
+    
+            });     
+//        
                   
     </script>
     
