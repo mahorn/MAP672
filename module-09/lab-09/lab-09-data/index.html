@@ -134,6 +134,7 @@
         
         L.control.layers(null, sourcesLabels, {collapsed: false, position: 'bottomright'}).addTo(map);
         
+<<<<<<< Updated upstream
         map.on('click', function(e) {
         
             for(var l in layerInfo) {
@@ -164,6 +165,33 @@
 
             } // end for loop
         }); // end on click
+=======
+        var geoJsonLayers = {};
+    
+        for(var layer in layerInfo) {
+            geoJsonLayers[layer] = L.geoJson(plants, {
+                onEachFeature: function (feature, layer) {
+                    map.on('click', function(e) {
+                        [layerInfo[layer].source].eachLayer(function(layer) {
+                            var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
+                            if(distance > 500) {
+                                layer.setStyle({
+                                    stroke: false,
+                                    fill: false
+                                });
+                            } else {
+                                layer.setStyle({
+                                    stroke: true,
+                                    fill: true
+                                });
+                                layer.bindPopup('I am');
+                            }
+                        });
+                    });
+                }
+            });
+        }
+>>>>>>> Stashed changes
         
         
     </script>
