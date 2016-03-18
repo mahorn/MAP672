@@ -118,6 +118,12 @@
         }
         
 //        geoJsonLayers['hydroLayer'].eachLayer(function(layer) {
+////                console.log(layer.feature.properties);
+//        });
+//        geoJsonLayers['petroleumLayer'].eachLayer(function(layer) {
+////                console.log(layer.feature.properties);
+//        });
+//        geoJsonLayers['solarLayer'].eachLayer(function(layer) {
 //                console.log(layer.feature.properties);
 //        });
         
@@ -133,67 +139,57 @@
         }
         
         L.control.layers(null, sourcesLabels, {collapsed: false, position: 'bottomright'}).addTo(map);
-        
-<<<<<<< Updated upstream
+
         map.on('click', function(e) {
-        
             for(var l in layerInfo) {
-
                 geoJsonLayers[l].eachLayer(function(layer) {
-
-
                     var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
-                    console.log(distance);
-//                    if(distance > 500) {
-//                        layer.setStyle({
-//                            stroke: false,
-//                            fill: false
-//                        });
-//                    } else {
-//                        layer.setStyle({
-//                            stroke: true,
-//                            fill: true
-//                        });
-                    var props = layer.feature.properties;
-
-                    layer.bindPopup(props.plant_name);
-                    
-                    /// loop through the sources of each layer
-
-                
-                }); // end eachLayer()
-
-            } // end for loop
-        }); // end on click
-=======
-        var geoJsonLayers = {};
-    
-        for(var layer in layerInfo) {
-            geoJsonLayers[layer] = L.geoJson(plants, {
-                onEachFeature: function (feature, layer) {
-                    map.on('click', function(e) {
-                        [layerInfo[layer].source].eachLayer(function(layer) {
-                            var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
-                            if(distance > 500) {
-                                layer.setStyle({
-                                    stroke: false,
-                                    fill: false
-                                });
-                            } else {
-                                layer.setStyle({
-                                    stroke: true,
-                                    fill: true
-                                });
-                                layer.bindPopup('I am');
-                            }
+                   
+                    if(distance > 500) {
+                        layer.setStyle({
+                            stroke: false,
+                            fill: false
                         });
-                    });
-                }
-            });
-        }
->>>>>>> Stashed changes
+                    } else {
+                        layer.setStyle({
+                            stroke: true,
+                            fill: true
+                        });
+                      
+                        var circle = L.circle(e.latlng);   
+                    if(distance > 500) {
+                        layer.setStyle({
+                            stroke: false,
+                            fill: false,
+                        });
+                    } else {
+                        layer.setStyle({
+                            stroke: true,
+                            fill: true,
+                            color: 'white'
+                            
+                        }).addTo(map);
+                        
+                        var content = layer.feature.properties;
+//                            console.log(content);
+                        for(var l in layer.feature.properties.fuel_source) {
+//                                console.log(l, layer.feature.properties.fuel_source[l]);
+                            var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
+//                            console.log(distance);
+                        }
         
+                        layer.bindPopup('<b><center>'+content.plant_name+'</b><br>'+'<b>'+l+': </b>'+                                                         layer.feature.properties.fuel_source[l]+" MW"+'<br>'+'this plant is a '+                                             distance.toLocaleString()+ " km from your click");
+//                        
+//                        loop through the source of each layer
+                       
+                    }
+                    }
+                }); 
+            }
+        });
         
+            
+            
     </script>
    
     
