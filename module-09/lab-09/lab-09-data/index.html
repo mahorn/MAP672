@@ -15,9 +15,9 @@
         body {
             margin: 0;
             padding: 0;
-            background: whitesmoke;
-            font-family: Lato, sans-serif;
-            color: #0D0000;
+            background: black;
+            font-family: Papyrus;
+            color: '#A92159';
         }
         header {
             padding: 6px 10%;
@@ -25,11 +25,13 @@
         h1 {
             display: inline-block;
             margin-right: 20px;
-            color: #001323;
+            color: #7D0541;
+            font-size: 2.9em;
         }
         h2 {
             display: inline-block;
-            color: #001323;
+            color: goldenrod;
+            font-size: 1.5em;
         }
         #map {
             width: 80%;
@@ -41,35 +43,41 @@
             width: 80%;
         }
         p {
-            font-size: 1em;
-            color: #001323;
+            font-size: 1.3em;
+            color: #7EC2AA;
+            font-family: Papyrus;
+            text-align: center;
         }
-        
+        a {
+            font-family: Papyrus;
+            color:goldenrod;
+            font-size: 0.7em;
+        }   
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>United States Electric Power Generation</h1>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
+        <p>Map authored by Maria Renee Horn</p>
+        <p>This map shows Hydro, Petroleum and Solar electric power generation across the United States.</p>
+        <p>Upon clicking on the map, you will see all the electric power plants within 500 km and the area will be highlighted.  Information regarding individual plants like its name, capacity in Megawatts and its distance from the plant to the click point will be also available.</p>
     </footer>
 
     <script src="power-plants.js"></script>
     <script>
 
-       var map = L.map('map', {
+        var map = L.map('map', {
           center: [36,-94],
           zoom: 4,
-      });
+        });
       
-      var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
           subdomains: 'abcd',
           maxZoom: 19
@@ -80,13 +88,20 @@
         plants.features.sort(function(a, b) {
            return b.properties.capacity_mw - a.properties.capacity_mw; 
         });
-    
+       
+        var circle = L.circle([38.0297, -84.4947], 505000, {
+                                weight: 0.1,
+                                stroke: 0.1,
+                                fillOpacity: .1,
+                                color: 'white'
+        }).addTo(map);
+        
         var commonStyles = {
                 weight: 0.8,
                 stroke: 0.8,
                 fillOpacity: .6
-        }
-      
+        };
+                      
         var layerInfo = {
             hydroLayer: {source: "Hydro", color: '#7EC2AA'},
             petroleumLayer: {source: "Petroleum", color: '#BCC747'},
@@ -116,7 +131,7 @@
                 }
             }).addTo(map);
         }
-        
+       
 //        geoJsonLayers['hydroLayer'].eachLayer(function(layer) {
 ////                console.log(layer.feature.properties);
 //        });
@@ -144,7 +159,9 @@
             for(var l in layerInfo) {
                 geoJsonLayers[l].eachLayer(function(layer) {
                     var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
-                   
+                    
+                    circle.setLatLng(e.latlng).addTo(map);
+                    
                     if(distance > 500) {
                         layer.setStyle({
                             stroke: false,
@@ -153,22 +170,8 @@
                     } else {
                         layer.setStyle({
                             stroke: true,
-                            fill: true
-                        });
-                      
-                        var circle = L.circle(e.latlng);   
-                    if(distance > 500) {
-                        layer.setStyle({
-                            stroke: false,
-                            fill: false,
-                        });
-                    } else {
-                        layer.setStyle({
-                            stroke: true,
                             fill: true,
-                            color: 'white'
-                            
-                        }).addTo(map);
+                        });
                         
                         var content = layer.feature.properties;
 //                            console.log(content);
@@ -176,14 +179,17 @@
 //                                console.log(l, layer.feature.properties.fuel_source[l]);
                             var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
 //                            console.log(distance);
+                            
                         }
-        
+                         
+                        circle.bindPopup('<b><center>'+content.plant_name+'</b><br>'+'<b>'+l+'</b>');                
+                        
                         layer.bindPopup('<b><center>'+content.plant_name+'</b><br>'+'<b>'+l+': </b>'+                                                         layer.feature.properties.fuel_source[l]+" MW"+'<br>'+'this plant is a '+                                             distance.toLocaleString()+ " km from your click");
 //                        
 //                        loop through the source of each layer
-                       
+                        
                     }
-                    }
+                    
                 }); 
             }
         });
