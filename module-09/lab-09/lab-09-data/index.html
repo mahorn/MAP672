@@ -111,14 +111,13 @@
         var geoJsonLayers = {};
         
         for(var layer in layerInfo) {
-//            console.log(layer, layerInfo[layer]);
             geoJsonLayers[layer] = L.geoJson(plants, {
+                
                 pointToLayer: function(feature, latlng) {
                     return L.circleMarker(latlng, commonStyles);
                 },
                 filter: function(feature) {
                     if(feature.properties.fuel_source[layerInfo[layer].source]) {
-//                        console.log(feature.properties.fuel_source[layerInfo[layer].source]);
                         return feature;
                     }
                 },
@@ -130,18 +129,8 @@
                     }
                 }
             }).addTo(map);
-        }
-       
-//        geoJsonLayers['hydroLayer'].eachLayer(function(layer) {
-////                console.log(layer.feature.properties);
-//        });
-//        geoJsonLayers['petroleumLayer'].eachLayer(function(layer) {
-////                console.log(layer.feature.properties);
-//        });
-//        geoJsonLayers['solarLayer'].eachLayer(function(layer) {
-//                console.log(layer.feature.properties);
-//        });
-        
+         }
+          
         function getRadius(val) {
             var radius = Math.sqrt(val/Math.PI);
             return radius * .8;
@@ -158,6 +147,7 @@
         map.on('click', function(e) {
             for(var l in layerInfo) {
                 geoJsonLayers[l].eachLayer(function(layer) {
+                    
                     var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
                     
                     circle.setLatLng(e.latlng).addTo(map);
@@ -173,32 +163,22 @@
                             fill: true,
                         });
                         
-                        var content = layer.feature.properties;
-//                            console.log(content);
+                    var content = layer.feature.properties;
+                        
                         for(var l in layer.feature.properties.fuel_source) {
-//                                console.log(l, layer.feature.properties.fuel_source[l]);
-                            var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
-//                            console.log(distance);
-                            
+                                
+                            var distance = e.latlng.distanceTo(layer.getLatLng())/1000;        
                         }
                          
                         circle.bindPopup('<b><center>'+content.plant_name+'</b><br>'+'<b>'+l+'</b>');                
                         
-                        layer.bindPopup('<b><center>'+content.plant_name+'</b><br>'+'<b>'+l+': </b>'+                                                         layer.feature.properties.fuel_source[l]+" MW"+'<br>'+'this plant is a '+                                             distance.toLocaleString()+ " km from your click");
-//                        
-//                        loop through the source of each layer
-                        
-                    }
-                    
+                        layer.bindPopup('<b><center>'+content.plant_name+'</b><br>'+'<b>'+l+': </b>'+                                                         layer.feature.properties.fuel_source[l]+" MW"+'<br>'+'this plant is a '+                                             distance.toLocaleString()+ " km from your click");        
+                    }  
                 }); 
-            }
+             }
         });
         
-            
-            
     </script>
-   
-    
     
 </body>
 
